@@ -1,0 +1,33 @@
+<h1>Edit Task</h1>
+
+<%= form_with(model: @task, local: true, class: "task-form") do |form| %>
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control", placeholder: "Enter task title" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control", placeholder: "Enter task description" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :category_id, "Category", class: "form-label" %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a category" }, { class: "form-select" } %>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <%= form.submit "Update Task", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<style>
+  .task-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+</style>

@@ -1,0 +1,6 @@
+<div class="task">
+  <p><%= task.title %></p>
+  <p><%= task.category.name if task.category %></p>
+  <p>Completed: <%= task.is_completed %></p>
+  <%= button_to 'Toggle Complete', toggle_is_completed_task_path(task), method: :patch %>
+</div>

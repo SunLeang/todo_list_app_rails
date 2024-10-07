@@ -1,0 +1,65 @@
+<h1>New Task</h1>
+
+<%= form_with(model: @task, local: true, class: "task-form") do |form| %>
+  <div class="field">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-input", placeholder: "Enter task title" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-textarea", placeholder: "Enter task description" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_id, "Category", class: "form-label" %>
+    <%= form.collection_select :category_id, @categories, :id, :name, { prompt: "Select a category" }, { class: "form-select" } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Task", class: "form-submit" %>
+  </div>
+<% end %>
+
+<style>
+  .task-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .form-input, .form-textarea, .form-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .form-textarea {
+    height: 100px;
+  }
+
+  .form-submit {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .form-submit:hover {
+    background-color: #0056b3;
+  }
+</style>

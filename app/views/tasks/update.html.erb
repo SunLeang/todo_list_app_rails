@@ -1,0 +1,13 @@
+<h1>Tasks#update</h1>
+<p>Find me in app/views/tasks/update.html.erb</p>
+
+<%= form_with(model: @task, local: true) do |form| %>
+  <!-- Other form fields -->
+  <div class="field">
+    <%= form.label :category_id %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, prompt: true %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
