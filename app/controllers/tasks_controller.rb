@@ -45,8 +45,12 @@ class TasksController < ApplicationController
   def toggle_is_completed
     if params[:status].present? && Task.statuses.keys.include?(params[:status])
       @task.update(status: params[:status])
+      flash[:notice] = "Status updated successfully"
+    else
+      flash[:alert] = "Invalid status"
     end
-    render json: { success: true, status: @task.status }
+
+    redirect_to tasks_path
   end
 
   private
