@@ -1,19 +1,39 @@
 <h1>New Task</h1>
 
+<% if @task.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+    <ul>
+      <% @task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with(model: @task, local: true, class: "task-form") do |form| %>
   <div class="field">
     <%= form.label :title, class: "form-label" %>
     <%= form.text_field :title, class: "form-input", placeholder: "Enter task title" %>
+    <% if @task.errors[:title].any? %>
+      <div class="error-message"><%= @task.errors[:title].join(", ") %></div>
+    <% end %>
   </div>
 
   <div class="field">
     <%= form.label :description, class: "form-label" %>
     <%= form.text_area :description, class: "form-textarea", placeholder: "Enter task description" %>
+    <% if @task.errors[:description].any? %>
+      <div class="error-message"><%= @task.errors[:description].join(", ") %></div>
+    <% end %>
   </div>
 
   <div class="field">
     <%= form.label :category_id, "Category", class: "form-label" %>
     <%= form.collection_select :category_id, @categories, :id, :name, { prompt: "Select a category" }, { class: "form-select" } %>
+    <% if @task.errors[:category_id].any? %>
+      <div class="error-message"><%= @task.errors[:category_id].join(", ") %></div>
+    <% end %>
   </div>
 
   <div class="actions">
@@ -61,5 +81,12 @@
 
   .form-submit:hover {
     background-color: #0056b3;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 0.875em;
+    margin-top: -10px;
+    margin-bottom: 10px;
   }
 </style>

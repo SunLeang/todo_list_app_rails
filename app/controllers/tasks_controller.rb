@@ -29,6 +29,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @categories = Category.all
     if @task.save
       redirect_to tasks_path, notice: "Task was successfully created."
     else
