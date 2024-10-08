@@ -46,4 +46,6 @@
     margin-bottom: 10px;
   }
 
-  
+  .small-select {
+    width: 30%; /* Adjust the width as needed */
+  }
