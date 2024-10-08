@@ -3,9 +3,20 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.all
-    if params[:sort_order].present?
-      @tasks = @tasks.order(status: params[:sort_order])
+
+    if params[:category_id].present?
+      @tasks = @tasks.where(category_id: params[:category_id])
     end
+
+    if params[:status].present?
+      @tasks = @tasks.where(status: params[:status])
+    end
+
+    if params[:sort_by].present? && params[:sort_order].present?
+      @tasks = @tasks.order("#{params[:sort_by]} #{params[:sort_order]}")
+    end
+
+    @categories = Category.all
   end
 
   def show
