@@ -3,6 +3,9 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.all
+    if params[:sort_order].present?
+      @tasks = @tasks.order(status: params[:sort_order])
+    end
   end
 
   def show
@@ -40,7 +43,9 @@ class TasksController < ApplicationController
   end
 
   def toggle_is_completed
-    @task.complete? ? @task.incomplete! : @task.complete!
+    if params[:status].present? && Task.statuses.keys.include?(params[:status])
+      @task.update(status: params[:status])
+    end
     render json: { success: true, status: @task.status }
   end
 
